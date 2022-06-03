@@ -6,7 +6,6 @@ void menu()
 {
     while (isDocumenting)
     {
-
         Console.WriteLine("What do you want to make?");
         Console.WriteLine("1. Make a new File");
         Console.WriteLine("2. Edit an existing File");
@@ -33,7 +32,6 @@ void menu()
 
 void MakeNewFileAndEdit()
 {
-
     Console.WriteLine("1.Standard File Name");
     Console.WriteLine("2.Custom File Name");
 
