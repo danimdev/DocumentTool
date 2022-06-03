@@ -33,7 +33,6 @@ void menu()
 
 void MakeNewFileAndEdit()
 {
-    isDocumenting = false;
 
     Console.WriteLine("1.Standard File Name");
     Console.WriteLine("2.Custom File Name");
@@ -76,6 +75,4 @@ void MakeNewFileAndEdit()
         t.Dispose();
         t.Close();
     }
-
-    isDocumenting = true;
 }
