@@ -37,7 +37,7 @@ void MakeNewFileAndEdit()
 
     int fileNameChoice = Convert.ToInt32(Console.ReadLine());
 
-    string textFileName = null;
+    string textFileName = "";
 
     if (fileNameChoice == 1)
     {
