@@ -19,6 +19,7 @@ void menu()
                 MakeNewFileAndEdit();
                 break;
             case 2:
+                EditExistingFIle();
                 break;
             case 3:
                 isDocumenting = false;
@@ -43,7 +44,7 @@ void MakeNewFileAndEdit()
     {
         textFileName = "Document " + DateTime.Now.ToString("H m ss") + ".txt";
     }
-    else if(fileNameChoice == 2)
+    else if (fileNameChoice == 2)
     {
         Console.Write("Name: ");
         string newFileName = Console.ReadLine();
@@ -72,5 +73,61 @@ void MakeNewFileAndEdit()
 
         t.Dispose();
         t.Close();
+    }
+}
+
+void EditExistingFIle()
+{
+    Console.Write("File or DirectoryName:");
+
+    string fileName = Console.ReadLine();
+
+    fileName += ".txt";
+
+    bool isEditing = true;
+
+    while (isEditing)
+    {
+        do
+        {
+            ReadAFile(fileName);
+            WriteToFile(fileName);
+            Console.WriteLine("Press Enter to continue Edit Escape to Exit editing");
+        } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+        isEditing = false;
+    }
+}
+
+void ReadAFile(string fileName)
+{
+    FileStream readStream = new FileStream(fileName, FileMode.Open);
+
+    using (var t = new StreamReader(readStream))
+    {
+        string ln;
+        while ((ln = t.ReadLine()) != null)
+        {
+            Console.WriteLine(ln);
+        }
+
+        t.Close();
+    }
+}
+
+void WriteToFile(string filename)
+{
+    FileStream writeStream = new FileStream(filename, FileMode.Append);
+    using (var s = new StreamWriter(writeStream))
+    {
+        s.AutoFlush = true;
+
+        Console.Write("NewText: ");
+
+        string inputToFile = Console.ReadLine();
+
+        s.WriteLine(inputToFile);
+
+        s.Dispose();
+        s.Close();
     }
 }
