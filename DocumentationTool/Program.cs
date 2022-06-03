@@ -35,7 +35,23 @@ void MakeNewFileAndEdit()
 {
     isDocumenting = false;
 
-    string textFileName = "Document " + DateTime.Now.ToString("H m ss") + ".txt";
+    Console.WriteLine("1.Standard File Name");
+    Console.WriteLine("2.Custom File Name");
+
+    int fileNameChoice = Convert.ToInt32(Console.ReadLine());
+
+    string textFileName = null;
+
+    if (fileNameChoice == 1)
+    {
+        textFileName = "Document " + DateTime.Now.ToString("H m ss") + ".txt";
+    }
+    else if(fileNameChoice == 2)
+    {
+        Console.Write("Name: ");
+        string newFileName = Console.ReadLine();
+        textFileName = newFileName + ".txt";
+    }
 
     FileStream stream = new FileStream(textFileName, FileMode.OpenOrCreate);
 
