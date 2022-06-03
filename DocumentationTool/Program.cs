@@ -1,32 +1,25 @@
-﻿using System.Windows.Input;
+﻿string textFileName = "Document " + DateTime.Now.ToString("H m ss") + ".txt";
 
-GetInput();
+FileStream stream = new FileStream(textFileName, FileMode.OpenOrCreate);
 
-void GetInput()
+Console.WriteLine("What do you want to Document?");
+using (var t = new StreamWriter(stream))
 {
-    
-    string textFileName = "Document " + DateTime.Now.ToString("H m ss") + ".txt";
-    FileStream stream = new FileStream(textFileName, FileMode.OpenOrCreate);
+    t.AutoFlush = true;
 
-    Console.WriteLine("What do you want to Document?");
-    using (var t = new StreamWriter(stream))
+    do
     {
-        t.AutoFlush = true;
+        Console.Write("Text: ");
 
-        do
-        {
-            Console.Write("Text: ");
+        string inputToFile = Console.ReadLine();
 
-            string inputToFile = Console.ReadLine();
+        t.WriteLine(inputToFile);
 
-            t.WriteLine(inputToFile);
+        Console.Write("Press Enter For A New Line or Escape for Closing The Application...");
+        Console.WriteLine();
 
-            Console.Write("Press Enter For A New Line...");
-            Console.WriteLine();
+    } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
 
-        } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
-
-        t.Dispose();
-        t.Close();
-    }
+    t.Dispose();
+    t.Close();
 }
