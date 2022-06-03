@@ -1,25 +1,65 @@
-﻿string textFileName = "Document " + DateTime.Now.ToString("H m ss") + ".txt";
+﻿bool isDocumenting = true;
 
-FileStream stream = new FileStream(textFileName, FileMode.OpenOrCreate);
+menu();
 
-Console.WriteLine("What do you want to Document?");
-using (var t = new StreamWriter(stream))
+void menu()
 {
-    t.AutoFlush = true;
-
-    do
+    while (isDocumenting)
     {
-        Console.Write("Text: ");
 
-        string inputToFile = Console.ReadLine();
+        Console.WriteLine("What do you want to make?");
+        Console.WriteLine("1. Make a new File");
+        Console.WriteLine("2. Edit an existing File");
+        Console.WriteLine("3. Close Application");
 
-        t.WriteLine(inputToFile);
+        int menuInput = Convert.ToInt32(Console.ReadLine());
 
-        Console.Write("Press Enter For A New Line or Escape for Closing The Application...");
-        Console.WriteLine();
+        switch (menuInput)
+        {
+            case 1:
+                MakeNewFileAndEdit();
+                break;
+            case 2:
+                break;
+            case 3:
+                isDocumenting = false;
+                break;
+            default:
+                Console.WriteLine("No Valid Choice");
+                break;
+        }
+    }
+}
 
-    } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+void MakeNewFileAndEdit()
+{
+    isDocumenting = false;
 
-    t.Dispose();
-    t.Close();
+    string textFileName = "Document " + DateTime.Now.ToString("H m ss") + ".txt";
+
+    FileStream stream = new FileStream(textFileName, FileMode.OpenOrCreate);
+
+    Console.WriteLine("What do you want to Document?");
+    using (var t = new StreamWriter(stream))
+    {
+        t.AutoFlush = true;
+
+        do
+        {
+            Console.Write("Text: ");
+
+            string inputToFile = Console.ReadLine();
+
+            t.WriteLine(inputToFile);
+
+            Console.Write("Press Enter For A New Line or Escape for Closing The Application...");
+            Console.WriteLine();
+
+        } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+
+        t.Dispose();
+        t.Close();
+    }
+
+    isDocumenting = true;
 }
